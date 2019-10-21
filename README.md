@@ -1,7 +1,7 @@
 # DCT coefficient decoder
 Python wrapper for decoding DCT coefficients from JPEG-compressed images.
 
-**Note**: This is research code and has not been designed for use in production.
+**Note**: This is research code and has not been designed for use in production. Tested with Python 3.5 and *libjpeg 9a*.
 
 ## Prerequisites
 
