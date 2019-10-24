@@ -5,11 +5,21 @@ Python wrapper for decoding DCT coefficients from JPEG-compressed images.
 
 ## Prerequisites
 
-You need to have *libjpeg* installed. Please update the include and lib paths in `setup.py` such that they point to your installation.
+* Header files for building Python extensions
+```
+apt-get install python-dev
+```
 
-Python dependencies:
-* Cython
-* numpy
+* You need to have *libjpeg* installed. Please update the include and lib paths in `setup.py` such that they point to your installation.
+```python
+libjpeg_include_dir = "path/to/libjpeg/build/include"
+libjpeg_lib_dir = "path/to/libjpeg/build/lib"
+```
+
+* Python dependencies
+```
+pip install Cython numpy
+```
 
 ## Compile
 To compile the extension for use in the project's root directory, run the following:
