@@ -7,7 +7,7 @@ Python wrapper for decoding DCT coefficients from JPEG-compressed images.
 
 * Header files for building Python extensions
 ```
-apt-get install python-dev
+apt-get install python3-dev
 ```
 
 * You need to have *libjpeg* installed. Please update the include and lib paths in `setup.py` such that they point to your installation.
