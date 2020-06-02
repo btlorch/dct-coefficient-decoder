@@ -53,3 +53,9 @@ d.get_quantization_table(0)
 
 ## Known issues
 * Attempting to read uncompressed image after reading DCT coefficients results in `Improper call to JPEG library in state 210`. Workaround: Initialize another instance of `PyCoefficientDecoder`.
+
+## Misc
+Another way to quickly read an image's quantization tables:
+```bash
+djpeg -verbose -verbose image.jpg > /dev/null
+```
