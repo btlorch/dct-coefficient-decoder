@@ -10,7 +10,8 @@ Python wrapper for decoding DCT coefficients from JPEG-compressed images.
 apt-get install python3-dev
 ```
 
-* You need to have *libjpeg* installed. Please update the include and lib paths in `setup.py` such that they point to your installation.
+* You need to have *libjpeg* installed. If you don't have a global installation, you can download *libjpeg* from [here](https://ijg.org/files/) and install it by following the build instructions. Please update the include and lib paths in `setup.py` such that they point to your installation.
+
 ```python
 libjpeg_include_dir = "path/to/libjpeg/build/include"
 libjpeg_lib_dir = "path/to/libjpeg/build/lib"
@@ -55,7 +56,9 @@ d.get_quantization_table(0)
 * Attempting to read uncompressed image after reading DCT coefficients results in `Improper call to JPEG library in state 210`. Workaround: Initialize another instance of `PyCoefficientDecoder`.
 
 ## Misc
-Another way to quickly read an image's quantization tables:
+1. Another way to quickly read an image's quantization tables:
 ```bash
 djpeg -verbose -verbose image.jpg > /dev/null
 ```
+
+2. A visual explanation of the *Discrete Cosine Transform* (DCT) is given in [this notebook](discrete_cosine_transform_visual_explanation.ipynb).
