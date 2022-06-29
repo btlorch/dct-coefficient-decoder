@@ -13,7 +13,7 @@ namespace decoding {
             CoefficientDecoder(std::string filename);
             ~CoefficientDecoder();
 
-            void load(bool use_float_dct, bool do_fancy_upsampling, bool do_block_smoothing);
+            void load(J_DCT_METHOD dct_method, bool do_fancy_upsampling, bool do_block_smoothing);
             void unload();
             void get_quantization_table(int channel, unsigned short int* output);
             void get_dct_coefficients(int channel, int16_t* output);

@@ -9,7 +9,7 @@ cdef extern from "CoefficientDecoder.h" namespace "decoding":
     cdef cppclass CoefficientDecoder:
         CoefficientDecoder() except +
         CoefficientDecoder(string) except +
-        void load(bint, bint, bint) except +
+        void load(_JDctMethod, bint, bint) except +
         void unload() except +
         void get_quantization_table(int, unsigned short int *) except +
         int get_width_in_blocks(int) except +
@@ -30,6 +30,7 @@ cdef extern from "CoefficientDecoder.h" namespace "decoding":
         int max_h_samp_factor
         int max_v_samp_factor
         _JColorSpace jpeg_color_space
+        _JDctMethod dct_method
 
 # Enum workaround: see https://github.com/cython/cython/issues/1529
 cdef extern from "jpeglib.h":
@@ -42,3 +43,8 @@ cdef extern from "jpeglib.h":
         JCS_YCCK, # Y/Cb/Cr/K
         JCS_BG_RGB, # big gamut red/green/blue, bg-sRGB
         JCS_BG_YCC # big gamut Y/Cb/Cr, bg-sYCC
+
+    ctypedef enum _JDctMethod "J_DCT_METHOD":
+        JDCT_ISLOW,		# slow but accurate integer algorithm
+        JDCT_IFAST,		# faster, less accurate integer method
+        JDCT_FLOAT		# floating-point: accurate, fast on fast HW

@@ -23,15 +23,20 @@ pip install Cython numpy
 ```
 
 ## Compile
+
+**Global installation**
+```bash
+python setup.py install
+```
+
+**Local installation**
+
 To compile the extension for use in the project's root directory, run the following:
 ```bash
 python setup.py build_ext --inplace
 ```
 
-This will place a shared object in the current working directory.
-
-For use from another directory, make sure to include this module in your Python path.
-This can be done by either including the project's root directory in your `PYTHONPATH` environment variable, or by installing the module with `python setup.py install`.
+This will place a shared object in the current working directory.  For use from another directory, make sure to include this module in your PYTHONPATH.
 
 ## Usage
 ```python
@@ -50,6 +55,14 @@ d.get_dct_coefficients(0)
 
 # Read quantization table for luminance channel
 d.get_quantization_table(0)
+```
+
+Example how to vary the DCT implementation. Supported options are *JDCT_ISLOW* (default), *JDCT_IFAST*, *JDCT_FLOAT*.
+```python
+from decoder import PyCoefficientDecoder, JDctMethod
+filename = "image.jpg"
+d = PyCoefficientDecoder(filename, dct_method=JDctMethod.JDCT_FLOAT)
+img = d.get_decompressed_image()
 ```
 
 ## Known issues

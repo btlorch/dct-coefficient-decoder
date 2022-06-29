@@ -2,16 +2,16 @@
 import numpy as np
 cimport numpy as np
 
-from CoefficientDecoder cimport CoefficientDecoder, _JColorSpace
+from CoefficientDecoder cimport CoefficientDecoder, _JColorSpace, _JDctMethod
 from libcpp.string cimport string
 
 
 cdef class PyCoefficientDecoder:
     cdef CoefficientDecoder decoder
 
-    def __cinit__(self, filename, use_float_dct=False, do_fancy_upsampling=True, do_block_smoothing=True):
+    def __cinit__(self, filename, dct_method=JDctMethod.JDCT_ISLOW, do_fancy_upsampling=True, do_block_smoothing=True):
         self.decoder = CoefficientDecoder(<string> filename.encode('utf-8'))
-        self.decoder.load(use_float_dct, do_fancy_upsampling, do_block_smoothing)
+        self.decoder.load(dct_method, do_fancy_upsampling, do_block_smoothing)
 
     def __dealloc__(self):
         self.decoder.unload()
@@ -103,3 +103,8 @@ cpdef enum JColorSpace:
     JCS_YCCK = _JColorSpace.JCS_YCCK, # Y/Cb/Cr/K
     JCS_BG_RGB = _JColorSpace.JCS_BG_RGB, # big gamut red/green/blue, bg-sRGB
     JCS_BG_YCC = _JColorSpace.JCS_BG_YCC # big gamut Y/Cb/Cr, bg-sYCC
+
+cpdef enum JDctMethod:
+    JDCT_ISLOW = _JDctMethod.JDCT_ISLOW # slow but accurate integer algorithm
+    JDCT_IFAST = _JDctMethod.JDCT_IFAST # faster, less accurate integer method
+    JDCT_FLOAT = _JDctMethod.JDCT_FLOAT # floating-point: accurate, fast on fast HW

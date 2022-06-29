@@ -17,7 +17,7 @@ namespace decoding {
     CoefficientDecoder::~CoefficientDecoder () {
     }
 
-    void CoefficientDecoder::load(bool use_float_dct, bool do_fancy_upsampling, bool do_block_smoothing) {
+    void CoefficientDecoder::load(J_DCT_METHOD dct_method, bool do_fancy_upsampling, bool do_block_smoothing) {
         // For some unknown reason we cannot call load in the constructor
         this->infile = fopen(this->filename.c_str(), "rb");
         if (NULL == this->infile) {
@@ -43,9 +43,8 @@ namespace decoding {
         // Default behaviour, apparently, block smoothing is enabled
         this->cinfo.do_block_smoothing = (boolean) do_block_smoothing;
 
-        if (use_float_dct) {
-            this->cinfo.dct_method = JDCT_FLOAT;
-        }
+        // DCT method
+        this->cinfo.dct_method = dct_method;
 
         // Compute output image dimensions
         jpeg_calc_output_dimensions(&this->cinfo);

@@ -24,4 +24,4 @@ decoder_ext = Extension("decoder",
                         extra_compile_args=["-std=c++11"],
                         )
 
-setup(cmdclass={"build_ext": build_ext}, ext_modules=cythonize(decoder_ext))
+setup(cmdclass={"build_ext": build_ext}, ext_modules=cythonize(decoder_ext), version="0.2")
