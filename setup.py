@@ -7,9 +7,10 @@ import os
 
 # Remove the -Wstrict-prototypes flag from the OPT environment variable as it does not make sense when compiling C++ sources and throws warnings.
 (opt,) = get_config_vars('OPT')
-os.environ['OPT'] = " ".join(
-    flag for flag in opt.split() if flag != '-Wstrict-prototypes'
-)
+if opt is not None:
+    os.environ['OPT'] = " ".join(
+        flag for flag in opt.split() if flag != '-Wstrict-prototypes'
+    )
 
 libjpeg_include_dir = os.path.expanduser("~/i1/libjpeg/jpeg-9a/build/include")
 libjpeg_lib_dir = os.path.expanduser("~/i1/libjpeg/jpeg-9a/build/lib")
