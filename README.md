@@ -26,8 +26,10 @@ pip install Cython numpy
 
 **Global installation**
 ```bash
-python setup.py install
+pip install .
 ```
+
+This will automatically install the python dependencies.
 
 **Local installation**
 
